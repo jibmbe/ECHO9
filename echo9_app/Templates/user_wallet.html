@@ -1,0 +1,286 @@
+<!-- user_wallet.html -->
+{% extends 'base.html' %}
+
+{% block title %}User Wallet{% endblock %}
+
+{% block content %}
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #ff5722; /* Deep Orange */
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #4caf50; /* Green */
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .hamburger-menu {
+      display: block;
+      text-align: right;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    .menu {
+      display: none;
+      flex-direction: column;
+      background-color: #333; /* Dark Gray */
+      border-radius: 5px;
+      padding: 10px;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow */
+    }
+
+    .menu li {
+      margin-bottom: 15px;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .menu a:hover {
+      color: #ffd700; /* Gold */
+    }
+
+    /* Customize Deposit, Withdrawal, Investment, and Spin headers */
+    h3:nth-child(4n-1) {
+      color: #e91e63; /* Pink */
+    }
+
+    h3:nth-child(4n) {
+      color: #ffc107; /* Amber */
+    }
+
+    /* Colored boxes for wallets */
+    .wallet-container {
+      display: flex;
+      flex-direction: column; /* Changed to column */
+    }
+
+    .wallet-box {
+      margin-bottom: 20px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .wallet-box:hover {
+      transform: scale(1.05); /* Add a subtle scale effect on hover */
+    }
+
+    .account-balance-box,
+    .deposit-box,
+    .withdrawal-box,
+    .investment-box,
+    .spin-box,
+    .coin-wallet-box {
+      border-radius: 15px;
+      overflow: hidden;
+      background-clip: padding-box; /* Added background-clip */
+      margin-bottom: 0; /* Adjusted margin */
+    }
+
+    .account-balance-box {
+      background-color: #2196f3; /* Blue */
+      padding: 15px;
+      color: #fff; /* Text color for better contrast */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .balance-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .deposit-box {
+      background-color: #2196f3; /* Blue */
+    }
+
+    .withdrawal-box {
+      background-color: #e91e63; /* Pink */
+    }
+
+    .investment-box {
+      background-color: #ffc107; /* Amber */
+    }
+
+    .spin-box {
+      background-color: #673ab7; /* Deep Purple */
+    }
+
+    .coin-wallet-box {
+      background-color: #4caf50; /* Green */
+      padding: 15px;
+      color: #fff; /* Text color for better contrast */
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .coin-wallet-box:hover {
+      transform: scale(1.05); /* Add a subtle scale effect on hover */
+    }
+
+    .wallet-box h3,
+    .coin-wallet-box h3 {
+      color: #fff; /* Text color for better contrast */
+      padding: 15px;
+      margin: 0;
+    }
+
+    .wallet-box p,
+    .coin-wallet-box p {
+      padding: 15px;
+      margin: 0;
+      border-radius: 0 0 15px 15px; /* Adjusted border-radius */
+    }
+
+    /* Icon styling */
+    .fa-icon {
+      font-size: 18px;
+      margin-right: 8px;
+    }
+  </style>
+
+  <div id="content">
+    <!-- Hamburger menu for additional links -->
+    <div class="hamburger-menu">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" id="menu-label">&#9776;</label>
+      
+      <ul class="menu">
+        <li><a href="{% url 'invest' %}">Invest</a></li>
+        <li><a href="{% url 'withdraw_funds' %}">Withdraw Funds</a></li>
+        <li><a href="{% url  'deposit' %}">Deposit</a></li>
+        <li><a href="{% url 'trade_coins' %}">Trade Coins</a></li>
+        <li><a href="{% url 'create_pledge' %}">Create Pledge</a></li>
+        <li><a href="{% url 'list_pledges' %}">List Pledges</a></li>
+        <li><a href="{% url 'pair_pledges' pledge_id=1 %}">Pair Pledges</a></li>
+        <li><a href="{% url 'list_transactions' %}">List Transactions</a></li>
+       
+      </ul>
+    </div>
+
+    <h2>Your Wallet</h2>
+
+    <!-- Account Balance Box -->
+    <div class="account-balance-box">
+      <p>
+        <span class="balance-icon">&#8377;</span>
+        Your current wallet balance is: Ksh{{ user_profile.account_balance }}
+      </p>
+    </div>
+
+    <h3>Referred Users</h3>
+    {% if referred_users %}
+      <ul>
+        {% for referred_user in referred_users %}
+          <li>{{ referred_user.user.username }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No referred users yet.</p>
+    {% endif %}
+
+    <!-- Colored boxes for wallets -->
+    <div class="wallet-container">
+      <div class="wallet-box deposit-box">
+        <h3><i class="fa-icon fas fa-coins"></i> Deposit Wallet</h3>
+        {% for deposit in deposit_wallet %}
+          <p>Amount: Ksh{{ deposit.amount }}</p>
+          <!-- Add other deposit details as needed -->
+        {% endfor %}
+      </div>
+
+      <div class="wallet-box withdrawal-box">
+        <h3><i class="fa-icon fas fa-money-bill-wave"></i> Withdrawal Wallet</h3>
+        {% for withdrawal in withdrawal_wallet %}
+          <p>Amount: Ksh{{ withdrawal.amount }}</p>
+          <!-- Add other withdrawal details as needed -->
+        {% endfor %}
+      </div>
+
+      <div class="wallet-box coin-wallet-box">
+        <h3><i class="fa-icon fas fa-coins"></i> Coin Wallet</h3>
+        {% for coin_transaction in coin_wallet %}
+          <p>Amount: {{ coin_transaction.amount }} Coins</p>
+          <!-- Add other coin wallet details as needed -->
+        {% endfor %}
+      </div>
+
+      <div class="wallet-box investment-box">
+        <h3><i class="fa-icon fas fa-chart-line"></i> Investment Wallet</h3>
+        {% for investment in investment_wallet %}
+          <p>Amount: Ksh{{ investment.amount }}</p>
+          <!-- Add other investment details as needed -->
+        {% endfor %}
+      </div>
+
+      <div class="wallet-box spin-box">
+        <h3><i class="fa-icon fas fa-spinner"></i> Spin Wallet</h3>
+        {% for spin in spin_wallet %}
+          <p>Result: {{ spin.result }}</p>
+          <!-- Add other spin details as needed -->
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var menuToggle = document.getElementById('menu-toggle');
+    var menuLabel = document.getElementById('menu-label');
+    var menuLinks = document.querySelector('.menu');
+
+    // Handle initial state based on checkbox status
+    menuLinks.style.display = 'none';
+
+    menuToggle.addEventListener('change', function() {
+      // Toggle the menu visibility
+      menuLinks.style.display = this.checked ? 'flex' : 'none';
+    });
+  </script>
+{% endblock %}

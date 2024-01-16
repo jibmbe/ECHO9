@@ -1,0 +1,17 @@
+<!-- echo9_app/templates/referred_users.html -->
+{% extends 'base.html' %}
+
+{% block title %}Referred Users{% endblock %}
+
+{% block content %}
+  <h2>Referred Users</h2>
+  {% if referred_users %}
+    <ul>
+      {% for referred_user in referred_users %}
+        <li>{{ referred_user.user.username }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No referred users yet.</p>
+  {% endif %}
+{% endblock %}

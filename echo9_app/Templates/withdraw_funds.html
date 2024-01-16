@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <i class="fas fa-money-check-alt"></i> Withdraw Funds
+{% endblock %}
+
+{% block content %}
+  <div id="content" style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ff9800; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; color: #fff;">
+    <h2 style="font-size: 24px; margin-bottom: 20px;">
+      <i class="fas fa-money-check-alt"></i> Withdraw Funds
+    </h2>
+    <p>Hello, {{ username }}!</p>
+
+    <form method="post" action="{% url 'withdraw_funds' %}" style="margin-top: 20px;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" style="background-color: #fff; color: #ff9800; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Withdraw</button>
+    </form>
+
+    <div style="margin-top: 20px; color: #fff;">
+      <h3 style="font-size: 20px; margin-bottom: 10px;">Additional Information</h3>
+      <div>
+        <p>Withdraw funds with ease using the form above. Make sure to enter the correct details for a seamless transaction.</p>
+      </div>
+      <div style="margin-top: 10px;">
+        <p>For any assistance or inquiries, feel free to contact our support team.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; color: #fff;">
+      <h3 style="font-size: 20px; margin-bottom: 10px;"></h3>
+      <div>
+        <i class="fas fa-info-circle"></i> For assistance, contact our support team.
+      </div>
+      <div style="margin-top: 10px;">
+        <i class="fas fa-exclamation-triangle"></i> Ensure correct details for a seamless transaction.
+      </div>
+    </div>
+  </div>
+{% endblock %}

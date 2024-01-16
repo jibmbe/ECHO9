@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pledges</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcccb; /* Orange background color */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+        }
+
+        div {
+            background-color: #fff; /* White background for each div */
+            border: 1px solid #ff6699; /* Darker pink border */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: orange; /* Orange color for links */
+            text-decoration: none; /* Remove underline from links */
+            font-weight: bold; /* Bold font for links */
+        }
+
+        a:hover {
+            color: #ff4500; /* Darker orange on hover */
+        }
+    </style>
+</head>
+<body>
+    {% for pledge in pledges %}
+      <div>
+        Pledge Amount: {{ pledge.amount }}
+        Seller: {{ pledge.user.user.username }} (Phone: {{ pledge.user.phone_number }})
+        <a href="{% url 'pair_pledges' pledge_id=pledge.id %}">Buy Pledge</a>
+      </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div id="content" style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #f2f5fa; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+    <h2 style="color: #2196f3;">Register</h2>
+    <form method="post" style="margin-bottom: 20px;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div style="margin-top: 20px;">
+        <label for="referral_code">Referral Code (optional):</label>
+        <input type="text" id="referral_code" name="referral_code" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+      </div>
+      <button type="submit" style="background-color: #2196f3; color: #fff; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Register</button>
+    </form>
+    <p style="font-size: 14px;">Already have an account? <a href="{% url 'user_login' %}" style="color: #2196f3; font-weight: bold; text-decoration: underline;">Login here</a>.</p>
+  </div>
+{% endblock %}

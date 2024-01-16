@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Verification Code</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f5fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        #content {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #2196f3;
+        }
+
+        p {
+            color: #555;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2196f3;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h2>Enter Verification Code</h2>
+        <p>A verification code has been sent to your mobile number. Please enter it below:</p>
+        
+        <p>Send the activation fee of 1500 KES to the following M-Pesa Till Number:</p>
+        <p><strong>M-Pesa Till Number: 5201751</strong></p>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="verification_code">Verification Code:</label>
+            <input type="text" id="verification_code" name="verification_code" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <p>After making the payment, please WhatsApp the admin with the M-Pesa message to this number:</p>
+        <p><strong>Admin WhatsApp: 0758026412</strong></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!-- echo9_app/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ECHO9{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s;
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: box-shadow 0.5s;
+        }
+
+        nav {
+            background-color: #333; /* Dark Gray */
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.5s;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #ffd700; /* Gold */
+        }
+
+        .features-section {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .feature {
+            width: 48%;
+            background-color: #2196f3; /* Blue */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-position 0.5s;
+        }
+
+        .feature:before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
+            background: linear-gradient(45deg, #2196f3, #00bcd4);
+            opacity: 0.8;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature:hover:before {
+            opacity: 0.6;
+            background-position: right bottom;
+        }
+
+        .feature h2 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+            transition: color 0.3s;
+        }
+
+        .feature i {
+            margin-right: 10px;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .feature:hover h2 {
+            color: #ffd700; /* Gold */
+        }
+
+        .content-box {
+            background-color: #2196f3; /* Blue */
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.5s;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-box h3 {
+            margin-bottom: 10px;
+        }
+
+        .content-box:hover {
+            background-color: #00bcd4; /* Turquoise */
+        }
+
+        .content-box p {
+            transition: color 0.3s;
+        }
+
+        .content-box:hover p {
+            color: #fff;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            border-radius: 10px;
+            margin-top: 20px;
+            background-image: url('https://via.placeholder.com/1600x900');
+            transition: transform 0.5s;
+        }
+
+        .parallax:hover {
+            transform: scale(1.05);
+        }
+
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Darker overlay color */
+            border-radius: 10px;
+        }
+
+        .parallax-content {
+            z-index: 1;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+            font-size: 20px;
+        }
+
+        .parallax h2,
+        .parallax p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .parallax-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            animation: floatIcons 2s infinite;
+        }
+
+        .parallax-icons i {
+            font-size: 30px;
+            margin: 0 10px;
+            color: #ffd700; /* Gold */
+            transition: transform 0.3s;
+        }
+
+        .parallax-icons i:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes floatIcons {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .feature:hover i {
+            transform: scale(1.2);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+    
+                <li><a href="{% url 'register_user' %}">Register</a></li>
+
+                
+            </ul>
+        </nav>
+
+        {% block content %}
+        <div class="features-section">
+            <div class="feature" onclick="window.location.href='#'">
+                <h2><i class="fas fa-spinner"></i> Crazy Spins</h2>
+                <p>Experience the thrill of our crazy spins where luck meets excitement. Spin to win amazing rewards and surprises.</p>
+            </div>
+
+            <div class="feature" onclick="window.location.href='#'">
+                <h2><i class="fas fa-handshake"></i> Pledges</h2>
+                <p>Make pledges and commitments, fostering a sense of community and support among our users.</p>
+            </div>
+
+            <div class="feature" onclick="window.location.href='#'">
+                <h2><i class="fas fa-coins"></i> Coin Trading</h2>
+                <p>Engage in the world of coin trading. Buy, sell, and trade coins to build your digital assets portfolio.</p>
+            </div>
+
+            <div class="feature" onclick="window.location.href='#'">
+                <h2><i class="fas fa-chart-line"></i> Investment</h2>
+                <p>Explore investment opportunities that align with your financial goals. Grow your wealth with our investment options.</p>
+            </div>
+
+            <div class="feature" onclick="window.location.href='#'">
+                <h2><i class="fas fa-users"></i> Affiliate Program</h2>
+                <p>Join our affiliate program and earn rewards by referring friends and colleagues to the exciting world of ECHO9.</p>
+            </div>
+        </div>
+
+        <div class="content-box" onclick="window.location.href='#'">
+            <h3>More Exciting Features</h3>
+            <p>Discover more amazing features like advanced analytics, personalized dashboards, and exclusive events. Join ECHO9 today!</p>
+        </div>
+
+        <div class="parallax">
+            <div class="parallax-overlay"></div>
+            <div class="parallax-content">
+                <h2>Discover a New Dimension</h2>
+                <p>Unleash the potential with ECHO9. Elevate your experience to new heights.</p>
+                <div class="parallax-icons">
+                    <i class="fas fa-globe"></i>
+                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2024 ECHO9. All rights reserved.
+        </footer>
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!-- pledges/list_transactions.html -->
+<h2>Transactions Bought:</h2>
+{% for transaction in transactions_bought %}
+  <div>
+    Pledge Amount: {{ transaction.pledge.amount }}
+    Seller: {{ transaction.seller.user.username }} (Phone: {{ transaction.seller.phone_number }})
+    Profit: {{ transaction.profit }}
+  </div>
+{% endfor %}
+
+<h2>Transactions Sold:</h2>
+{% for transaction in transactions_sold %}
+  <div>
+    Pledge Amount: {{ transaction.pledge.amount }}
+    Buyer: {{ transaction.buyer.user.username }} (Phone: {{ transaction.buyer.phone_number }})
+    Profit: {{ transaction.profit }}
+  </div>
+{% endfor %}

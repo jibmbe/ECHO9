@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Invest{% endblock %}
+
+{% block content %}
+  <div id="content" style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #9c27b0; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; color: #fff;">
+    <h2 style="font-size: 24px; margin-bottom: 20px;">Invest with Confidence</h2>
+    <form method="post" action="{% url 'invest' %}" style="margin-bottom: 20px;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" style="background-color: #fff; color: #9c27b0; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Invest Now</button>
+    </form>
+
+    <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: 20px; color: #000;">
+      <h3 style="color: #9c27b0; font-size: 20px; margin-bottom: 10px;">Investment Rates</h3>
+      <div style="margin-left: 20px;">
+        <div style="background-color: #9c27b0; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+          <i class="fas fa-chart-line" style="font-size: 24px; margin-right: 10px;"></i>
+          <strong>10% after every 24 hours</strong>
+          <p>Watch your investment grow with a daily return of 10%.</p>
+        </div>
+        <div style="background-color: #9c27b0; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+          <i class="fas fa-trophy" style="font-size: 24px; margin-right: 10px;"></i>
+          <strong>30% after 3 days</strong>
+          <p>Enjoy higher returns with a 30% profit after 3 days.</p>
+        </div>
+        <div style="background-color: #9c27b0; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+          <i class="fas fa-chart-bar" style="font-size: 24px; margin-right: 10px;"></i>
+          <strong>60% on weekly basis</strong>
+          <p>For a more sustained growth, get 60% returns every week.</p>
+        </div>
+        <div style="background-color: #9c27b0; color: #fff; padding: 15px; border-radius: 8px;">
+          <i class="fas fa-percent" style="font-size: 24px; margin-right: 10px;"></i>
+          <strong>100% on monthly basis</strong>
+          <p>Maximize your investment with a 100% profit on a monthly basis.</p>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-size: 14px;">These rates are subject to change and may vary based on market conditions.</p>
+    </div>
+  </div>
+{% endblock %}

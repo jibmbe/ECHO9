@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <i class="fas fa-coins"></i> Deposit
+{% endblock %}
+
+{% block content %}
+  <div id="content" style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #ff4081; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; color: #fff;">
+    <h2 style="font-size: 24px; margin-bottom: 20px;">
+      <i class="fas fa-coins"></i> Deposit
+    </h2>
+    <form method="post" style="margin-bottom: 20px;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" style="background-color: #fff; color: #ff4081; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Deposit</button>
+    </form>
+
+    <div style="color: #fff;">
+      <h3 style="font-size: 20px; margin-bottom: 10px;">Additional Information</h3>
+      <p>Deposit funds securely and watch your investments grow. Our platform ensures a hassle-free deposit process.</p>
+    </div>
+  </div>
+{% endblock %}

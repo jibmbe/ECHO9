@@ -1,0 +1,22 @@
+<!-- withdrawal_request.html -->
+{% extends 'base.html' %}
+
+{% block title %}Withdrawal Request{% endblock %}
+
+{% block content %}
+  <h2>Withdrawal Request</h2>
+
+  <h3>Withdrawal History</h3>
+  <ul>
+    {% for withdrawal in withdrawal_history %}
+      <li>{{ withdrawal.amount }} - {{ withdrawal.status }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Submit Withdrawal Request</h3>
+  <form method="post" action="{% url 'echo9_app:withdrawal_request' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
